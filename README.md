@@ -25,3 +25,31 @@ A synthesizable on-chip interconnect fabric — parametrized mesh/torus topology
 - **Verification**: functional coverage on routing paths and VC/buffer
   occupancy, deadlock/livelock checks via SVA, and traffic-pattern-
   based throughput/latency characterization
+
+
+
+  ## Architecture Overview
+
+```
+                  Node(0,0)      Node(1,0)      Node(2,0)
+                 ┌────────┐     ┌────────┐     ┌────────┐
+                 │ Router  │────▶│ Router  │────▶│ Router  │
+                 │  + IP   │◀────│  + IP   │◀────│  + IP   │
+                 └───┬────┘     └───┬────┘     └───┬────┘
+                     │                  │                  │
+                  Node(0,1)      Node(1,1)      Node(2,1)
+                 ┌───▼────┐     ┌───▼────┐     ┌───▼────┐
+                 │ Router  │────▶│ Router  │────▶│ Router  │
+                 │  + IP   │◀────│  + IP   │◀────│  + IP   │
+                 └────────┘     └────────┘     └────────┘
+
+   Per-router pipeline:
+   ┌────┐   ┌────┐   ┌────┐   ┌────┐   ┌────┐
+   │ BW │──▶│ RC │──▶│ VA │──▶│ SA │──▶│ ST │──▶ output port
+   └────┘   └────┘   └────┘   └────┘   └────┘
+   (buffer   (route    (VC       (switch   (crossbar
+    write)   compute)  alloc)    alloc)    traversal)
+```
+
+---
+
