@@ -124,7 +124,7 @@ network-on-chip/
 ### Tools
 
 - Verilator ≥ 5.0
-- Python 3.10+ with NumPy/Matplotlib (traffic generation, characterization plots)
+- Python 3.10+ with NumPy/Matplotlib
 - GTKWave for waveform debug
 
 
