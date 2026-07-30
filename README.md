@@ -59,47 +59,46 @@ network-on-chip/
 ├── README.md
 ├── LICENSE
 ├── .gitignore
-├── Makefile                          # top-level: make sim / make regress / make characterize
+├── Makefile                         
 ├── docs/
-│   ├── router_microarchitecture.md   # pipeline stages, VC allocation, switch allocation
-│   ├── routing_algorithm.md          # XY routing, deadlock-freedom argument, adaptive variant
-│   ├── flow_control.md               # credit-based backpressure, VC/buffer sizing
-│   └── verification_plan.md          # test plan, coverage model, traffic patterns used
+│   ├── router_microarchitecture.md   
+│   ├── routing_algorithm.md         
+│   ├── flow_control.md               
 │
 ├── rtl/
 │   ├── router/
 │   │   ├── router_top.sv
-│   │   ├── input_buffer.sv           # per-VC buffering
-│   │   ├── route_compute.sv          # XY / adaptive routing logic
+│   │   ├── input_buffer.sv          
+│   │   ├── route_compute.sv       
 │   │   ├── vc_allocator.sv
 │   │   ├── switch_allocator.sv
 │   │   ├── crossbar.sv
-│   │   └── credit_counter.sv         # credit-based flow control per output VC
+│   │   └── credit_counter.sv
 │   ├── network/
-│   │   ├── mesh_top.sv               # instantiates R x C routers, wires mesh links
-│   │   └── link.sv                   # inter-router physical link (flit + credit signals)
+│   │   ├── mesh_top.sv              
+│   │   └── link.sv                  
 │   ├── ni/
-│   │   ├── network_interface.sv      # packetize/de-packetize adapter
+│   │   ├── network_interface.sv      
 │   │   └── flit_defs.sv
 │   └── common/
-│       └── pkg_noc_params.sv         # mesh dims, VC count, buffer depth, flit width
+│       └── pkg_noc_params.sv       
 │
 ├── verif/
 │   ├── tb/
-│   │   ├── router_tb.sv              # single-router unit test
-│   │   ├── mesh_tb.sv                # full-network sim with traffic generators
+│   │   ├── router_tb.sv            
+│   │   ├── mesh_tb.sv                
 │   │   └── deadlock_check_tb.sv
 │   ├── traffic_gen/
-│   │   ├── uniform_random.py         # uniform random traffic pattern generator
+│   │   ├── uniform_random.py         
 │   │   ├── transpose_pattern.py
-│   │   ├── hotspot_pattern.py        # many-to-one congestion pattern
+│   │   ├── hotspot_pattern.py        
 │   │   └── bit_complement.py
 │   ├── sva/
-│   │   ├── deadlock_freedom_assertions.sv  # no cyclic buffer dependency (XY routing invariant)
+│   │   ├── deadlock_freedom_assertions.sv 
 │   │   ├── credit_conservation_assertions.sv
 │   │   └── vc_allocation_assertions.sv
 │   └── ref_model/
-│       └── flit_level_sim.py         # Python cycle-approximate model for latency/throughput cross-check
+│       └── flit_level_sim.py         
 │
 ├── sim/
 │   └── verilator/
@@ -107,16 +106,16 @@ network-on-chip/
 │       └── sim_main.cpp
 │
 ├── characterization/
-│   ├── run_sweep.py                  # sweeps injection rate, collects latency/throughput
+│   ├── run_sweep.py                  
 │   ├── latency_vs_load_plot.py
-│   └── saturation_throughput.py      # finds network saturation point per traffic pattern
+│   └── saturation_throughput.py      
 │
 ├── scripts/
 │   └── run_regression.py
 │
 └── .github/
     └── workflows/
-        └── ci.yml                    # lint + router/small-mesh smoke tests on push
+        └── ci.yml                   
 ```
 
 ---
