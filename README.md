@@ -128,5 +128,23 @@ network-on-chip/
 - GTKWave for waveform debug
 
 
----
+## Verification Approach
 
+- **Router-level unit tests**: buffer write, route computation, VC
+  allocation, switch allocation, and crossbar traversal each verified
+  in isolation before full-mesh integration.
+- **Full-network functional tests**: `mesh_tb.sv` runs synthetic
+  traffic patterns (uniform random, transpose, bit-complement, hotspot)
+  across the full mesh and checks every injected flit is received
+  intact and in-order per flow.
+- **Deadlock/livelock checking**: SVA assertions encode the
+  deadlock-freedom invariant of XY routing directly (no cyclic
+  resource-dependency among buffers) rather than relying solely on
+  simulation timeout to infer a deadlock occurred.
+- **Cross-check model**: a Python cycle-approximate flit-level model
+  provides an independent latency/throughput estimate to sanity-check
+  RTL characterization results.
+- **Performance characterization**: latency-vs-injection-rate curves
+  and saturation throughput are measured per traffic pattern — a
+  network-level correctness-and-performance story, not just "packets
+  arrived."
